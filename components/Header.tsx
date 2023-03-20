@@ -1,0 +1,38 @@
+import React from 'react';
+import {StyleSheet, View, Text, Image} from 'react-native';
+// import Avatar from './assets/avatar.png';
+const Avatar = require('./assets/avatar.png');
+
+function Header() {
+  return (
+    <View style={[styles.header]}>
+      <Text style={styles.headerFont}>CryptoTracker Pro</Text>
+      <Image source={Avatar} style={styles.image} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    height: 138,
+    backgroundColor: '#385775',
+    color: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 24,
+  },
+  headerFont: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '700',
+    lineHeight: 28,
+  },
+  image: {
+    width: 56,
+    height: 56,
+  },
+});
+
+export default Header;
