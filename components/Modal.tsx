@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flexDirection: 'column',
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 20,
     paddingHorizontal: 15,
     backgroundColor: '#fff',
     borderRadius: 15,
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     paddingHorizontal: 10,
+    textAlign: 'center',
     paddingVertical: 5,
   },
   crossContainer: {

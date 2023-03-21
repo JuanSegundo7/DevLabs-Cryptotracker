@@ -13,8 +13,6 @@ import Header from '../components/Header';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const screenHeight = Dimensions.get('window').height;
-
 function Home({navigation}: any) {
   const cryptos = useSelector((state: any) => state.Cryptos);
 
@@ -38,9 +36,18 @@ function Home({navigation}: any) {
               );
             })}
           <TouchableOpacity>
-            <Text style={styles.text} onPress={handlePress}>
+            {/* <Text style={styles.text} onPress={handlePress}>
               + Add a Cryptocurrency
-            </Text>
+            </Text> */}
+            <View>
+              <Icon
+                style={styles.icon}
+                onPress={handlePress}
+                name="add-circle"
+                size={60}
+                color="#385775"
+              />
+            </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
