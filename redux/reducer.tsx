@@ -1,5 +1,11 @@
 import {Crypto} from '../models/types';
-import {GET_ONE_CRYPTO, UPDATE_CRYPTOS, ERROR, CLEAR_ERROR} from './actions';
+import {
+  GET_ONE_CRYPTO,
+  UPDATE_CRYPTOS,
+  ERROR,
+  CLEAR_ERROR,
+  ELIMINATE_CRYPTO,
+} from './actions';
 
 const initialState = {
   Cryptos: [],
@@ -15,12 +21,27 @@ const cryptoReducer = (state = initialState, action: any) => {
       if (array.some((crypto: Crypto) => crypto.id === action.payload.id)) {
         return {
           ...state,
+          Error: 'The searched crypto currency is already in the list',
         };
       }
 
       return {
         ...state,
         Cryptos: [...state.Cryptos, action.payload],
+      };
+    }
+
+    case ELIMINATE_CRYPTO: {
+      const array = state.Cryptos;
+
+      const newArray = array.filter(
+        (crypto: Crypto) => crypto.id !== action.payload,
+      );
+
+      return {
+        ...state,
+        Cryptos: newArray,
+        Error: 'The crypto currency has been deleted from the list succesfully',
       };
     }
 

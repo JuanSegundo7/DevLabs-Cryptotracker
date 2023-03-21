@@ -31,7 +31,6 @@ export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
 
     dispatch({type: GET_ONE_CRYPTO, payload: finalCrypto});
   } catch (e) {
-    console.log(e, 'llegue error');
     dispatch({type: ERROR});
   }
 };
@@ -40,6 +39,6 @@ export const clearError = () => async (dispatch: Function) => {
   return dispatch({type: CLEAR_ERROR});
 };
 
-export const elminateCrypto = (id: string) => async (dispatch: Function) => {
+export const eliminateCrypto = (id: string) => async (dispatch: Function) => {
   return dispatch({type: ELIMINATE_CRYPTO, payload: id});
 };

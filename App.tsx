@@ -15,6 +15,7 @@ import AddCryptoScreen from './pages/AddCrypto';
 import DetailCryptoScreen from './pages/DetailCrypto';
 
 import store from './redux/store';
+
 const Stack = createStackNavigator();
 
 function App(): JSX.Element {

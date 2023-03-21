@@ -5,18 +5,22 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import {Crypto} from '../models/types';
 import CryptoDetail from '../components/Crypto';
 import Header from '../components/Header';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const screenHeight = Dimensions.get('window').height;
 
 function Home({navigation}: any) {
+  const cryptos = useSelector((state: any) => state.Cryptos);
+
   const handlePress = () => {
     navigation.navigate('AddCrypto');
   };
-
-  const cryptos = useSelector((state: any) => state.Cryptos);
 
   return (
     <>
@@ -49,7 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
-    height: '100%',
     justifyContent: 'flex-start',
   },
   text: {
@@ -58,6 +61,9 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#385775',
     marginVertical: 48,
+  },
+  icon: {
+    marginVertical: 20,
   },
 });
 

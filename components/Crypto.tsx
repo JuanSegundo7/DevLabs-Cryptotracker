@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 24,
-    // marginRight: 'auto',
     color: '#212B36',
   },
   subTitle: {

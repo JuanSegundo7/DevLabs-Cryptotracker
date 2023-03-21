@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
-// import Avatar from './assets/avatar.png';
 const Avatar = require('./assets/avatar.png');
 
 function Header() {

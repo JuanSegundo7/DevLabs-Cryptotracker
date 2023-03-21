@@ -7,26 +7,23 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getOneCrypto} from '../redux/actions';
+import ModalComponent from '../components/Modal';
 
 function AddCrypto({navigation}: any) {
+  const error = useSelector((state: any) => state.Error);
   const dispatch = useDispatch();
 
-  const handlePress = () => {
-    dispatch(getOneCrypto(crypto) as any);
-    navigation.navigate('Home');
-  };
-
-  const handleBack = () => {
-    navigation.navigate('Home');
-  };
-
+  const [isEffectComplete, setIsEffectComplete] = useState(false);
+  const [isActionComplete, setIsActionComplete] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [isFocused, setFocused] = useState(false);
-
+  const [isDisabled, setIsDisabled] = useState(true);
   const [crypto, setCrypto] = useState('');
 
   const handleFocus = () => {
+    setIsDisabled(false);
     setFocused(true);
   };
 
@@ -35,6 +32,35 @@ function AddCrypto({navigation}: any) {
   };
 
   const windowHeight = Dimensions.get('window').height;
+
+  useEffect(() => {
+    if (error) {
+      setModalVisible(true);
+    } else {
+      setIsEffectComplete(true);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (isEffectComplete && isActionComplete && !error) {
+      navigation.navigate('Home');
+    }
+  }, [isEffectComplete, isActionComplete, error]);
+
+  const handlePress = async () => {
+    try {
+      await dispatch(getOneCrypto(crypto) as any);
+      setIsActionComplete(true);
+    } catch (error) {
+      setIsEffectComplete(false);
+      setIsActionComplete(false);
+      setModalVisible(true);
+    }
+  };
+
+  const handleBack = () => {
+    navigation.navigate('Home');
+  };
 
   return (
     <View style={styles.addCrypto}>
@@ -50,25 +76,27 @@ function AddCrypto({navigation}: any) {
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        {/* {error && <Text>{error}</Text>} */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={handlePress}>
+          <TouchableOpacity
+            style={[styles.button, {opacity: isDisabled || !crypto ? 0.5 : 1}]}
+            disabled={isDisabled || !crypto}
+            onPress={handlePress}>
             <Text
               style={[
                 styles.buttonText,
-                (isFocused || crypto.length > 1) && styles.focusedButton,
+                crypto.length > 0 && styles.focusedButton,
               ]}>
               Add
             </Text>
           </TouchableOpacity>
         </View>
       </View>
-      {/* <ModalComponent
+      <ModalComponent
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         navigation={navigation}
         page="AddCrypto"
-      /> */}
+      />
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,15 +9,25 @@ import {
 } from 'react-native';
 import Header from '../components/Header';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ModalContainer from '../components/Modal';
+import {useDispatch} from 'react-redux';
+import {eliminateCrypto} from '../redux/actions';
 
 function DetailCrypto({navigation, route}: any) {
+  const dispatch = useDispatch();
   const {params} = route;
   const {crypto} = params;
 
+  const [modalVisible, setModalVisible] = useState(false);
   const windowHeight = Dimensions.get('window').height;
 
   const handlePress = () => {
     navigation.navigate('Home');
+  };
+
+  const handleEliminate = () => {
+    dispatch(eliminateCrypto(crypto.id) as any);
+    setModalVisible(true);
   };
 
   return (
@@ -26,7 +36,7 @@ function DetailCrypto({navigation, route}: any) {
       <Text onPress={handlePress} style={styles.link}>
         {`<`} Back to list
       </Text>
-      <View style={[styles.container, {height: windowHeight * 0.5}]}>
+      <View style={[styles.container, {height: windowHeight * 0.55}]}>
         <Image source={{uri: crypto.image}} style={styles.img} />
         <Text style={styles.title}>{crypto.name}</Text>
         <Text>{crypto.symbol}</Text>
@@ -85,10 +95,16 @@ function DetailCrypto({navigation, route}: any) {
             </View>
           )}
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleEliminate}>
           <Text style={styles.buttonText}>Eliminate</Text>
         </TouchableOpacity>
       </View>
+      <ModalContainer
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        page="Detail"
+        navigation={navigation}
+      />
     </View>
   );
 }
