@@ -1,10 +1,12 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const GET_ONE_CRYPTO = 'GET_ONE_CRYPTO';
 export const UPDATE_CRYPTOS = 'UPDATE_CRYPTOS';
 export const ERROR = 'ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const ELIMINATE_CRYPTO = 'ELIMINATE_CRYPTO';
+export const GET_ASYNC_DATA = 'GET_ASYNC_DATA';
 
 export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
   try {
@@ -31,6 +33,7 @@ export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
 
     dispatch({type: GET_ONE_CRYPTO, payload: finalCrypto});
   } catch (e) {
+    console.log(e);
     dispatch({type: ERROR});
   }
 };
@@ -41,4 +44,15 @@ export const clearError = () => async (dispatch: Function) => {
 
 export const eliminateCrypto = (id: string) => async (dispatch: Function) => {
   return dispatch({type: ELIMINATE_CRYPTO, payload: id});
+};
+
+export const getAsyncData = () => async (dispatch: Function) => {
+  try {
+    const value = await AsyncStorage.getItem('Cryptos');
+    if (value !== null) {
+      dispatch({type: GET_ASYNC_DATA, payload: JSON.parse(value)});
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };

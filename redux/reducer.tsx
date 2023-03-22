@@ -5,7 +5,10 @@ import {
   ERROR,
   CLEAR_ERROR,
   ELIMINATE_CRYPTO,
+  GET_ASYNC_DATA,
 } from './actions';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
   Cryptos: [],
@@ -25,9 +28,24 @@ const cryptoReducer = (state = initialState, action: any) => {
         };
       }
 
+      AsyncStorage.setItem(
+        'Cryptos',
+        JSON.stringify(
+          state.Cryptos.length > 0
+            ? [...state.Cryptos, action.payload]
+            : [action.payload],
+        ),
+      );
+
       return {
         ...state,
-        Cryptos: [...state.Cryptos, action.payload],
+      };
+    }
+
+    case GET_ASYNC_DATA: {
+      return {
+        ...state,
+        Cryptos: action.payload,
       };
     }
 
@@ -38,9 +56,10 @@ const cryptoReducer = (state = initialState, action: any) => {
         (crypto: Crypto) => crypto.id !== action.payload,
       );
 
+      AsyncStorage.setItem('Cryptos', JSON.stringify(newArray));
+
       return {
         ...state,
-        Cryptos: newArray,
         Error: 'The crypto currency has been deleted from the list succesfully',
       };
     }

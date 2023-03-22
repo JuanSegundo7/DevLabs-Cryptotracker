@@ -1,20 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import {Crypto} from '../models/types';
 import CryptoDetail from '../components/Crypto';
 import Header from '../components/Header';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {getAsyncData} from '../redux/actions';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Home({navigation}: any) {
+  const dispatch = useDispatch();
   const cryptos = useSelector((state: any) => state.Cryptos);
+  console.log(AsyncStorage.getItem('Cryptos'));
+  console.log(cryptos, 'cryptos');
+
+  // AsyncStorage.clear();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(getAsyncData() as any);
+    });
+    return unsubscribe;
+  }, [dispatch]);
 
   const handlePress = () => {
     navigation.navigate('AddCrypto');
