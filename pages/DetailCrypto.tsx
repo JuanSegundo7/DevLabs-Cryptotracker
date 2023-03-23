@@ -13,13 +13,14 @@ import ModalContainer from '../components/Modal';
 import {useDispatch} from 'react-redux';
 import {eliminateCrypto} from '../redux/actions';
 
+const windowHeight = Dimensions.get('window').height;
+
 function DetailCrypto({navigation, route}: any) {
   const dispatch = useDispatch();
   const {params} = route;
   const {crypto} = params;
 
   const [modalVisible, setModalVisible] = useState(false);
-  const windowHeight = Dimensions.get('window').height;
 
   const handlePress = () => {
     navigation.navigate('Home');
@@ -31,12 +32,12 @@ function DetailCrypto({navigation, route}: any) {
   };
 
   return (
-    <View style={{backgroundColor: 'white', height: '100%'}}>
+    <View style={styles.principalContainer}>
       <Header />
       <Text onPress={handlePress} style={styles.link}>
         {`<`} Back to list
       </Text>
-      <View style={[styles.container, {height: windowHeight * 0.55}]}>
+      <View style={[styles.container]}>
         <Image source={{uri: crypto.image}} style={styles.img} />
         <Text style={styles.title}>{crypto.name}</Text>
         <Text>{crypto.symbol}</Text>
@@ -110,6 +111,10 @@ function DetailCrypto({navigation, route}: any) {
 }
 
 const styles = StyleSheet.create({
+  principalContainer: {
+    backgroundColor: 'white',
+    height: '100%',
+  },
   link: {
     marginTop: 40,
     marginLeft: 24,
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
+    height: windowHeight * 0.55,
   },
   img: {
     width: 150,

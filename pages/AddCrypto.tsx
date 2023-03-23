@@ -10,9 +10,12 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {getOneCrypto} from '../redux/actions';
 import ModalComponent from '../components/Modal';
+import {RootState} from '../models/types';
+
+const windowHeight = Dimensions.get('window').height;
 
 function AddCrypto({navigation}: any) {
-  const error = useSelector((state: any) => state.Error);
+  const error = useSelector((state: RootState) => state.Error);
   const dispatch = useDispatch();
 
   const [isEffectComplete, setIsEffectComplete] = useState(false);
@@ -30,8 +33,6 @@ function AddCrypto({navigation}: any) {
   const handleBlur = () => {
     setFocused(false);
   };
-
-  const windowHeight = Dimensions.get('window').height;
 
   useEffect(() => {
     if (error) {
@@ -67,7 +68,7 @@ function AddCrypto({navigation}: any) {
       <Text style={styles.link} onPress={handleBack}>
         {'<'} Back to list
       </Text>
-      <View style={[styles.container, {height: windowHeight * 0.7}]}>
+      <View style={[styles.container]}>
         <Text style={styles.principalText}>Add a Criptocurrency</Text>
         <TextInput
           style={[styles.input, isFocused && styles.focused]}
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    height: windowHeight * 0.7,
   },
   link: {
     marginTop: 60,
@@ -133,8 +134,6 @@ const styles = StyleSheet.create({
   input: {
     height: 56,
     width: '100%',
-    left: 0,
-    top: 0,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: '#B7C0C6',
@@ -155,8 +154,6 @@ const styles = StyleSheet.create({
   button: {
     height: 48,
     width: 155,
-    left: 0,
-    top: 0,
     borderRadius: 4,
     backgroundColor: '#FBD24D',
     flexDirection: 'column',

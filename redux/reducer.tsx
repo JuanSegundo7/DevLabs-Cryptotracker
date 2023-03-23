@@ -1,11 +1,12 @@
 import {Crypto} from '../models/types';
 import {
   GET_ONE_CRYPTO,
-  UPDATE_CRYPTOS,
+  UPDATE_CRYPTO,
   ERROR,
   CLEAR_ERROR,
   ELIMINATE_CRYPTO,
   GET_ASYNC_DATA,
+  GET_UPDATE_CRYPTO,
 } from './actions';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,6 +15,7 @@ const initialState = {
   Cryptos: [],
   Crypto: {},
   Error: '',
+  UpdatedInfo: [],
 };
 
 const cryptoReducer = (state = initialState, action: any) => {
@@ -49,6 +51,13 @@ const cryptoReducer = (state = initialState, action: any) => {
       };
     }
 
+    case GET_UPDATE_CRYPTO: {
+      return {
+        ...state,
+        UpdatedInfo: action.payload,
+      };
+    }
+
     case ELIMINATE_CRYPTO: {
       const array = state.Cryptos;
 
@@ -64,10 +73,23 @@ const cryptoReducer = (state = initialState, action: any) => {
       };
     }
 
-    case UPDATE_CRYPTOS: {
+    case UPDATE_CRYPTO: {
+      let crypto = action.payload;
+      const array = state.Cryptos;
+
+      const updatedArray = array.map((obj: Crypto) => {
+        if (obj.id === crypto.id) {
+          return {...crypto};
+        } else {
+          return obj;
+        }
+      });
+
+      AsyncStorage.setItem('Cryptos', JSON.stringify(updatedArray));
+
       return {
         ...state,
-        Crypto: action.payload,
+        Cryptos: updatedArray,
       };
     }
 

@@ -1,17 +1,25 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Crypto} from '../models/types';
 
 export const GET_ONE_CRYPTO = 'GET_ONE_CRYPTO';
-export const UPDATE_CRYPTOS = 'UPDATE_CRYPTOS';
+export const UPDATE_CRYPTO = 'UPDATE_CRYPTO';
 export const ERROR = 'ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const ELIMINATE_CRYPTO = 'ELIMINATE_CRYPTO';
 export const GET_ASYNC_DATA = 'GET_ASYNC_DATA';
+export const GET_UPDATE_CRYPTO = 'GET_UPDATE_CRYPTO';
 
 export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
   try {
     const {data} = await axios.get(
       `https://data.messari.io/api/v1/assets/${crypto}/metrics`,
+      {
+        headers: {
+          'x-messari-api-key':
+            'VTizTHxMCL0-AfO91plCkfzy6Mf2FicVsm0A4VQvy47YHYsS',
+        },
+      },
     );
 
     const coinGeckoData = await axios.get(
@@ -35,6 +43,51 @@ export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
   } catch (e) {
     console.log(e);
     dispatch({type: ERROR});
+  }
+};
+
+export const updateCryptos =
+  (crypto: Crypto, updatedinfo: Crypto[]) => async (dispatch: Function) => {
+    const newObject = updatedinfo.find(
+      (cryptoData: Crypto) => crypto.id === cryptoData.id,
+    );
+
+    if (newObject) {
+      var newPriceUsd = newObject.metrics?.market_data.price_usd;
+      var newPercentageUsd =
+        newObject.metrics?.market_data.percent_change_usd_last_1_hour;
+    }
+
+    crypto = {
+      ...crypto,
+      market_data: {
+        price_usd: newPriceUsd as number,
+        percent_change_usd_last_1_hour: newPercentageUsd as number,
+      },
+    };
+
+    return dispatch({type: UPDATE_CRYPTO, payload: crypto});
+  };
+
+export const updateCryptosApi = () => async (dispatch: Function) => {
+  try {
+    const info = await axios.get(
+      'https://data.messari.io/api/v2/assets?fields=id,name,metrics/market_data/price_usd,metrics/market_data/percent_change_usd_last_1_hour&limit=500',
+      {
+        headers: {
+          'x-messari-api-key':
+            'VTizTHxMCL0-AfO91plCkfzy6Mf2FicVsm0A4VQvy47YHYsS',
+        },
+      },
+    );
+
+    const {data} = info.data;
+
+    const dataFlat = data.flat(1);
+
+    return dispatch({type: GET_UPDATE_CRYPTO, payload: dataFlat});
+  } catch (e) {
+    console.log(e);
   }
 };
 

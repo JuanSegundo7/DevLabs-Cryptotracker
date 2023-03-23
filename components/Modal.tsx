@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
   modalContainer: {
     flexDirection: 'column',
     paddingTop: 10,
-    paddingBottom: 20,
-    paddingHorizontal: 15,
+    paddingBottom: 30,
+    paddingHorizontal: 25,
     backgroundColor: '#fff',
     borderRadius: 15,
     justifyContent: 'center',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     paddingHorizontal: 10,
     textAlign: 'center',
     paddingVertical: 5,

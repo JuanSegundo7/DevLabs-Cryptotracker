@@ -6,22 +6,25 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import {Crypto} from '../models/types';
+
 import CryptoDetail from '../components/Crypto';
 import Header from '../components/Header';
+
 import {useSelector, useDispatch} from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {getAsyncData} from '../redux/actions';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import {RootState} from '../models/types';
+import {Crypto} from '../models/types';
 
 function Home({navigation}: any) {
   const dispatch = useDispatch();
-  const cryptos = useSelector((state: any) => state.Cryptos);
-  console.log(AsyncStorage.getItem('Cryptos'));
-  console.log(cryptos, 'cryptos');
+  const cryptos = useSelector((state: RootState) => state.Cryptos);
 
-  // AsyncStorage.clear();
+  const handlePress = () => {
+    navigation.navigate('AddCrypto');
+  };
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -30,14 +33,10 @@ function Home({navigation}: any) {
     return unsubscribe;
   }, [dispatch]);
 
-  const handlePress = () => {
-    navigation.navigate('AddCrypto');
-  };
-
   return (
     <>
       <Header />
-      <ScrollView style={{backgroundColor: 'white'}}>
+      <ScrollView style={styles.ScrollViewContainer}>
         <View style={styles.container}>
           {cryptos.length > 0 &&
             cryptos.map((crypto: Crypto) => {
@@ -50,10 +49,10 @@ function Home({navigation}: any) {
               );
             })}
           <TouchableOpacity>
-            {/* <Text style={styles.text} onPress={handlePress}>
+            <Text style={styles.text} onPress={handlePress}>
               + Add a Cryptocurrency
-            </Text> */}
-            <View>
+            </Text>
+            {/* <View>
               <Icon
                 style={styles.icon}
                 onPress={handlePress}
@@ -61,7 +60,7 @@ function Home({navigation}: any) {
                 size={60}
                 color="#385775"
               />
-            </View>
+            </View> */}
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -70,6 +69,9 @@ function Home({navigation}: any) {
 }
 
 const styles = StyleSheet.create({
+  ScrollViewContainer: {
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     backgroundColor: 'white',

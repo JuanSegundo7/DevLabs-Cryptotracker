@@ -42,11 +42,7 @@ function CryptoDetail({crypto, navigation}: Props) {
     <>
       <View style={styles.container}>
         <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
+          style={styles.touchableContainer}
           onPress={handlePress}>
           {!Object.keys(crypto).length ? (
             <Animated.View
@@ -127,10 +123,15 @@ function CryptoDetail({crypto, navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
+  touchableContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   img: {
-    width: 45,
-    height: 45,
-    marginRight: 10,
+    width: 42,
+    height: 42,
+    marginRight: 8,
   },
   flexLogo: {
     flexDirection: 'row',
