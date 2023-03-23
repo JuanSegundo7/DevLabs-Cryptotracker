@@ -12,12 +12,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ModalContainer from '../components/Modal';
 import {useDispatch} from 'react-redux';
 import {eliminateCrypto} from '../redux/actions';
-import {Navigation} from '../models/types';
+import {useNavigation} from '@react-navigation/native';
 
 const windowHeight = Dimensions.get('window').height;
 
-function DetailCrypto({navigation}: Navigation, {route}: any) {
-  console.log(route, 'route');
+function DetailCrypto({route}: any) {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const {params} = route;
   const {crypto} = params;
@@ -25,10 +25,10 @@ function DetailCrypto({navigation}: Navigation, {route}: any) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Home' as never);
   };
 
-  const handleEliminate = () => {
+  var handleEliminate = () => {
     dispatch(eliminateCrypto(crypto.id) as any);
     setModalVisible(true);
   };

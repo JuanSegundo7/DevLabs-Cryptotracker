@@ -3,7 +3,8 @@ import {Modal, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {clearError} from '../redux/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Navigation, RootState} from '../models/types';
+import {RootState} from '../models/types';
+import {useNavigation} from '@react-navigation/native';
 
 interface ModalInterface {
   modalVisible: boolean;
@@ -12,19 +13,22 @@ interface ModalInterface {
   logo: string;
 }
 
-function ModalContainer(
-  {modalVisible, setModalVisible, page, logo}: ModalInterface,
-  {navigation}: Navigation,
-) {
+function ModalContainer({
+  modalVisible,
+  setModalVisible,
+  page,
+  logo,
+}: ModalInterface) {
   const dispatch = useDispatch();
   const error = useSelector((state: RootState) => state.Error);
+  const navigation = useNavigation();
 
   const handlePress = () => {
     dispatch(clearError() as any);
 
     if (page == 'Detail') {
       setModalVisible(false);
-      navigation.navigate('Home');
+      navigation.navigate('Home' as never);
     }
 
     setModalVisible(false);

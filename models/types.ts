@@ -27,9 +27,24 @@ export interface RootState{
 
 export interface Navigation{
     navigation: NavigationValues
+    route: any
 }
 
 interface NavigationValues{
     navigate: Function,
     addListener: Function
+}
+
+export interface Route {
+    route?: RouteValues
+
+}
+
+interface RouteValues{
+    params: CryptoRoute
+}
+  
+
+interface CryptoRoute {
+    crypto: Crypto
 }

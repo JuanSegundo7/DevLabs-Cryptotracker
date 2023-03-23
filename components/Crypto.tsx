@@ -8,14 +8,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Crypto, Navigation} from '../models/types';
+import {Crypto} from '../models/types';
 
 interface Props {
   crypto: Crypto;
 }
 
-function CryptoDetail({crypto}: Props, {navigation}: Navigation) {
+function CryptoDetail({crypto}: Props) {
+  const navigation = useNavigation();
   const spinAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -34,7 +36,8 @@ function CryptoDetail({crypto}: Props, {navigation}: Navigation) {
   });
 
   const handlePress = () => {
-    if (navigation) navigation.navigate('DetailCrypto', {crypto: crypto});
+    if (navigation)
+      navigation.navigate('DetailCrypto' as never, {crypto: crypto} as never);
   };
 
   return (

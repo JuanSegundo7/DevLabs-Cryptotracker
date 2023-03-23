@@ -17,8 +17,6 @@ import {Navigation, RootState} from '../models/types';
 import {Crypto} from '../models/types';
 
 function Home({navigation}: Navigation) {
-  console.log(navigation, 'navigation');
-
   const dispatch = useDispatch();
   const cryptos = useSelector((state: RootState) => state.Cryptos);
 
