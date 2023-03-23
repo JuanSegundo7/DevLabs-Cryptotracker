@@ -12,10 +12,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ModalContainer from '../components/Modal';
 import {useDispatch} from 'react-redux';
 import {eliminateCrypto} from '../redux/actions';
+import {Navigation} from '../models/types';
 
 const windowHeight = Dimensions.get('window').height;
 
-function DetailCrypto({navigation, route}: any) {
+function DetailCrypto({navigation}: Navigation, {route}: any) {
+  console.log(route, 'route');
   const dispatch = useDispatch();
   const {params} = route;
   const {crypto} = params;
@@ -104,7 +106,7 @@ function DetailCrypto({navigation, route}: any) {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         page="Detail"
-        navigation={navigation}
+        logo="Done"
       />
     </View>
   );

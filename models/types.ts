@@ -8,7 +8,6 @@ export interface Crypto{
     metrics?: market_data
 }
 
-
 interface market_data {
     market_data: Market_data_values
 }
@@ -19,16 +18,18 @@ interface Market_data_values{
 
 }
 
-
-export interface Navigation{
-    navigation: Function,
-    addListener: Function
-
-}
-
 export interface RootState{
     Cryptos: Array<Crypto>
     Crypto: Object
     Error: string
     UpdatedInfo: Array<Crypto>
+}
+
+export interface Navigation{
+    navigation: NavigationValues
+}
+
+interface NavigationValues{
+    navigate: Function,
+    addListener: Function
 }

@@ -9,14 +9,13 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Crypto} from '../models/types';
+import {Crypto, Navigation} from '../models/types';
 
 interface Props {
   crypto: Crypto;
-  navigation: any;
 }
 
-function CryptoDetail({crypto, navigation}: Props) {
+function CryptoDetail({crypto}: Props, {navigation}: Navigation) {
   const spinAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -129,8 +128,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   img: {
-    width: 42,
-    height: 42,
+    width: 48,
+    height: 48,
     marginRight: 8,
   },
   flexLogo: {

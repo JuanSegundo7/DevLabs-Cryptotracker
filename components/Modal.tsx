@@ -3,22 +3,21 @@ import {Modal, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {clearError} from '../redux/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Navigation, RootState} from '../models/types';
 
 interface ModalInterface {
   modalVisible: boolean;
   setModalVisible: Function;
   page: string;
-  navigation: any;
+  logo: string;
 }
 
-function ModalContainer({
-  modalVisible,
-  setModalVisible,
-  page,
-  navigation,
-}: ModalInterface) {
+function ModalContainer(
+  {modalVisible, setModalVisible, page, logo}: ModalInterface,
+  {navigation}: Navigation,
+) {
   const dispatch = useDispatch();
-  const error = useSelector((state: any) => state.Error);
+  const error = useSelector((state: RootState) => state.Error);
 
   const handlePress = () => {
     dispatch(clearError() as any);
@@ -40,6 +39,21 @@ function ModalContainer({
               <Icon name="highlight-off" size={20} color="black" />
             </TouchableOpacity>
           </View>
+          {logo === 'Done' ? (
+            <Icon
+              name="check-circle"
+              style={styles.icons}
+              size={60}
+              color={'#0A8150'}
+            />
+          ) : (
+            <Icon
+              name="cancel"
+              style={styles.icons}
+              size={60}
+              color={'#DE3617'}
+            />
+          )}
           <Text style={styles.text}>{error && error}</Text>
         </View>
       </View>
@@ -50,20 +64,18 @@ function ModalContainer({
 const styles = StyleSheet.create({
   modalBackground: {
     position: 'absolute',
-    top: 0,
-    left: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
     zIndex: 100,
     backgroundColor: 'rgba(0,0,0,.5)',
   },
   modalContainer: {
     flexDirection: 'column',
-    paddingTop: 10,
+    paddingTop: 20,
     paddingBottom: 30,
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
     borderRadius: 15,
     justifyContent: 'center',
@@ -72,7 +84,7 @@ const styles = StyleSheet.create({
     height: 'auto',
   },
   text: {
-    fontSize: 18,
+    fontSize: 20,
     paddingHorizontal: 10,
     textAlign: 'center',
     paddingVertical: 5,
@@ -85,6 +97,9 @@ const styles = StyleSheet.create({
   },
   cross: {
     width: 'auto',
+  },
+  icons: {
+    marginBottom: 10,
   },
 });
 

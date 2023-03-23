@@ -7,14 +7,15 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+
 import {useDispatch, useSelector} from 'react-redux';
 import {getOneCrypto} from '../redux/actions';
 import ModalComponent from '../components/Modal';
-import {RootState} from '../models/types';
+import {Navigation, RootState} from '../models/types';
 
 const windowHeight = Dimensions.get('window').height;
 
-function AddCrypto({navigation}: any) {
+function AddCrypto({navigation}: Navigation) {
   const error = useSelector((state: RootState) => state.Error);
   const dispatch = useDispatch();
 
@@ -95,8 +96,8 @@ function AddCrypto({navigation}: any) {
       <ModalComponent
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        navigation={navigation}
         page="AddCrypto"
+        logo="Cross"
       />
     </View>
   );
@@ -137,7 +138,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: '#B7C0C6',
-    marginVertical: 40,
+    backgroundColor: '#FAFBFC',
+    marginTop: 24,
+    marginBottom: 16,
     paddingLeft: 8,
     paddingVertical: 16,
   },

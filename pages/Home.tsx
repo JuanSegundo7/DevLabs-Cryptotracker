@@ -13,12 +13,12 @@ import Header from '../components/Header';
 import {useSelector, useDispatch} from 'react-redux';
 import {getAsyncData} from '../redux/actions';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {RootState} from '../models/types';
+import {Navigation, RootState} from '../models/types';
 import {Crypto} from '../models/types';
 
-function Home({navigation}: any) {
+function Home({navigation}: Navigation) {
+  console.log(navigation, 'navigation');
+
   const dispatch = useDispatch();
   const cryptos = useSelector((state: RootState) => state.Cryptos);
 
@@ -40,13 +40,7 @@ function Home({navigation}: any) {
         <View style={styles.container}>
           {cryptos.length > 0 &&
             cryptos.map((crypto: Crypto) => {
-              return (
-                <CryptoDetail
-                  crypto={crypto}
-                  key={crypto.id}
-                  navigation={navigation}
-                />
-              );
+              return <CryptoDetail crypto={crypto} key={crypto.id} />;
             })}
           <TouchableOpacity>
             <Text style={styles.text} onPress={handlePress}>

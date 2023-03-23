@@ -18,21 +18,21 @@ function Navigation() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (cryptos.length && updatedInfo.length) {
-      cryptos.forEach(crypto => {
-        dispatch(updateCryptos(crypto, updatedInfo) as any);
-      });
-    }
-  }, [updatedInfo]);
+  // useEffect(() => {
+  //   if (cryptos.length && updatedInfo.length) {
+  //     cryptos.forEach(crypto => {
+  //       dispatch(updateCryptos(crypto, updatedInfo) as any);
+  //     });
+  //   }
+  // }, [updatedInfo]);
 
-  useEffect(() => {
-    const interval1 = setInterval(() => {
-      dispatch(updateCryptosApi() as any);
-      dispatch(getAsyncData() as any);
-    }, 14000);
-    return () => clearInterval(interval1);
-  }, []);
+  // useEffect(() => {
+  //   const interval1 = setInterval(() => {
+  //     dispatch(updateCryptosApi() as any);
+  //     dispatch(getAsyncData() as any);
+  //   }, 14000);
+  //   return () => clearInterval(interval1);
+  // }, []);
 
   return (
     <Stack.Navigator>
