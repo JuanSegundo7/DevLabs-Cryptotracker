@@ -11,6 +11,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Crypto} from '../models/types';
+import AnimatedText from './AnimatedText';
 
 interface Props {
   crypto: Crypto;
@@ -40,6 +41,11 @@ function CryptoDetail({crypto}: Props) {
       navigation.navigate('DetailCrypto' as never, {crypto: crypto} as never);
   };
 
+  const value = crypto?.market_data.price_usd.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
   return (
     <>
       <View style={styles.container}>
@@ -62,13 +68,7 @@ function CryptoDetail({crypto}: Props) {
               </View>
               <View style={[styles.insideContainer, styles.rightAlign]}>
                 {crypto.market_data.price_usd ? (
-                  <Text style={styles.title}>
-                    $
-                    {crypto.market_data.price_usd.toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </Text>
+                  <AnimatedText text={value} page="Home"></AnimatedText>
                 ) : (
                   <Text style={styles.title}>Not available</Text>
                 )}
@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
   },
   insideContainer: {
     flexDirection: 'column',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   green: {
     color: '#0A8150',

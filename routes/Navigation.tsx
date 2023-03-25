@@ -30,7 +30,7 @@ function Navigation() {
     const interval1 = setInterval(() => {
       dispatch(updateCryptosApi() as any);
       dispatch(getAsyncData() as any);
-    }, 3500);
+    }, 6000);
     return () => clearInterval(interval1);
   }, []);
 

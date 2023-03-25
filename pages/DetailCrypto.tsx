@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,14 +13,24 @@ import ModalContainer from '../components/Modal';
 import {useDispatch} from 'react-redux';
 import {eliminateCrypto} from '../redux/actions';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import {Crypto, RootState} from '../models/types';
+import AnimatedText from '../components/AnimatedText';
 
 const windowHeight = Dimensions.get('window').height;
 
 function DetailCrypto({route}: any) {
+  const cryptos = useSelector((state: RootState) => state.Cryptos);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {params} = route;
   const {crypto} = params;
+  const cryptoUpdated = cryptos.find(
+    (cryptoFromArray: Crypto) => cryptoFromArray.id === crypto.id,
+  );
+
+  useEffect(() => {}, [cryptoUpdated, cryptos]);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -33,6 +43,11 @@ function DetailCrypto({route}: any) {
     setModalVisible(true);
   };
 
+  const value = cryptoUpdated?.market_data.price_usd.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
   return (
     <View style={styles.principalContainer}>
       <Header />
@@ -44,31 +59,29 @@ function DetailCrypto({route}: any) {
         <Text style={styles.title}>{crypto.name}</Text>
         <Text>{crypto.symbol}</Text>
         <View style={[styles.insideContainer, styles.rightAlign]}>
-          {crypto.market_data.price_usd ? (
-            <Text style={styles.title}>
-              $
-              {crypto.market_data.price_usd.toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </Text>
+          {value && cryptoUpdated && cryptoUpdated.market_data.price_usd ? (
+            <AnimatedText text={value} page="Detail" />
           ) : (
             <Text style={styles.title}>Not available</Text>
           )}
-          {crypto.market_data.percent_change_usd_last_1_hour &&
-          crypto.market_data.percent_change_usd_last_1_hour > 0 ? (
+          {cryptoUpdated &&
+          cryptoUpdated.market_data.percent_change_usd_last_1_hour &&
+          cryptoUpdated &&
+          cryptoUpdated.market_data.percent_change_usd_last_1_hour > 0 ? (
             <View style={styles.iconContainer}>
-              {crypto.market_data.percent_change_usd_last_1_hour ? (
+              {cryptoUpdated &&
+              cryptoUpdated.market_data.percent_change_usd_last_1_hour ? (
                 <>
                   <Icon name="north-east" size={15} color="#0A8150" />
                   <Text style={[styles.green, styles.subTitle]}>
-                    {crypto.market_data.percent_change_usd_last_1_hour.toLocaleString(
-                      'en-US',
-                      {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      },
-                    )}
+                    {cryptoUpdated &&
+                      cryptoUpdated.market_data.percent_change_usd_last_1_hour.toLocaleString(
+                        'en-US',
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        },
+                      )}
                     %
                   </Text>
                 </>
@@ -78,17 +91,19 @@ function DetailCrypto({route}: any) {
             </View>
           ) : (
             <View style={styles.iconContainer}>
-              {crypto.market_data.percent_change_usd_last_1_hour ? (
+              {cryptoUpdated &&
+              cryptoUpdated.market_data.percent_change_usd_last_1_hour ? (
                 <>
                   <Icon name="south-west" size={15} color="#DE3617" />
                   <Text style={[styles.red, styles.subTitle]}>
-                    {crypto.market_data.percent_change_usd_last_1_hour.toLocaleString(
-                      'en-US',
-                      {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      },
-                    )}
+                    {cryptoUpdated &&
+                      cryptoUpdated.market_data.percent_change_usd_last_1_hour.toLocaleString(
+                        'en-US',
+                        {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        },
+                      )}
                     %
                   </Text>
                 </>
@@ -156,7 +171,7 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     borderRadius: 4,
-    marginTop: 20,
+    marginTop: 15,
     backgroundColor: '#FBD24D',
     flexDirection: 'column',
     alignItems: 'center',

@@ -15,6 +15,7 @@ import {getAsyncData} from '../redux/actions';
 
 import {Navigation, RootState} from '../models/types';
 import {Crypto} from '../models/types';
+import {AnyAction} from 'redux';
 
 function Home({navigation}: Navigation) {
   const dispatch = useDispatch();
