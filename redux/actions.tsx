@@ -1,6 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Crypto} from '../models/types';
+import env from '../env';
 
 export const GET_ONE_CRYPTO = 'GET_ONE_CRYPTO';
 export const UPDATE_CRYPTO = 'UPDATE_CRYPTO';
@@ -16,8 +17,7 @@ export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
       `https://data.messari.io/api/v1/assets/${crypto}/metrics`,
       {
         headers: {
-          'x-messari-api-key':
-            'VTizTHxMCL0-AfO91plCkfzy6Mf2FicVsm0A4VQvy47YHYsS',
+          'x-messari-api-key': env.API_KEY,
         },
       },
     );
@@ -75,8 +75,7 @@ export const updateCryptosApi = () => async (dispatch: Function) => {
       'https://data.messari.io/api/v2/assets?fields=id,name,metrics/market_data/price_usd,metrics/market_data/percent_change_usd_last_1_hour&limit=500',
       {
         headers: {
-          'x-messari-api-key':
-            'VTizTHxMCL0-AfO91plCkfzy6Mf2FicVsm0A4VQvy47YHYsS',
+          'x-messari-api-key': env.API_KEY,
         },
       },
     );

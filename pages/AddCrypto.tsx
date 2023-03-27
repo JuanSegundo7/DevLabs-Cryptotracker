@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useAppDispatch} from '../redux/hook';
 import {getOneCrypto} from '../redux/actions';
 import ModalComponent from '../components/Modal';

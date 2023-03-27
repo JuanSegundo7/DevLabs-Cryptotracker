@@ -44,13 +44,11 @@ function AnimatedText({
         ]}>
         {type == 'Positive' ? (
           <>
-            {' '}
             <Icon name="north-east" size={15} color="#0A8150" />
             {innerText}%
           </>
         ) : (
           <>
-            {' '}
             <Icon name="south-west" size={15} color="#DE3617" />
             {innerText}%
           </>
@@ -94,6 +92,9 @@ const styles = StyleSheet.create({
   },
   red: {
     color: '#DE3617',
+  },
+  logo: {
+    marginRight: 35,
   },
 });
 

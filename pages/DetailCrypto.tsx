@@ -13,18 +13,20 @@ import {useAppDispatch} from '../redux/hook';
 import {eliminateCrypto} from '../redux/actions';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import {Crypto, RootState} from '../models/types';
+import {Crypto, RootState, Route} from '../models/types';
 import AnimatedText from '../components/AnimatedText';
 
 const windowHeight = Dimensions.get('window').height;
 
-function DetailCrypto({route}: any) {
+function DetailCrypto({route}: Route) {
   const cryptos = useSelector((state: RootState) => state.Cryptos);
 
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
+
   const {params} = route;
   const {crypto} = params;
+
   const cryptoUpdated = cryptos.find(
     (cryptoFromArray: Crypto) => cryptoFromArray.id === crypto.id,
   );
