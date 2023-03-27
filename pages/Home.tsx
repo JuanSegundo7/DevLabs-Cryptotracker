@@ -10,15 +10,15 @@ import {
 import CryptoDetail from '../components/Crypto';
 import Header from '../components/Header';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {useAppDispatch} from '../redux/hook';
 import {getAsyncData} from '../redux/actions';
 
 import {Navigation, RootState} from '../models/types';
 import {Crypto} from '../models/types';
-import {AnyAction} from 'redux';
 
 function Home({navigation}: Navigation) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const cryptos = useSelector((state: RootState) => state.Cryptos);
 
   const handlePress = () => {
@@ -27,7 +27,7 @@ function Home({navigation}: Navigation) {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      dispatch(getAsyncData() as any);
+      dispatch(getAsyncData());
     });
     return unsubscribe;
   }, [dispatch]);

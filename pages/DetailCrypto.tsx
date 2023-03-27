@@ -8,9 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 import Header from '../components/Header';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import ModalContainer from '../components/Modal';
-import {useDispatch} from 'react-redux';
+import {useAppDispatch} from '../redux/hook';
 import {eliminateCrypto} from '../redux/actions';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
@@ -23,7 +22,7 @@ function DetailCrypto({route}: any) {
   const cryptos = useSelector((state: RootState) => state.Cryptos);
 
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {params} = route;
   const {crypto} = params;
   const cryptoUpdated = cryptos.find(
@@ -39,14 +38,30 @@ function DetailCrypto({route}: any) {
   };
 
   var handleEliminate = () => {
-    dispatch(eliminateCrypto(crypto.id) as any);
+    dispatch(eliminateCrypto(crypto.id));
     setModalVisible(true);
   };
 
-  const value = cryptoUpdated?.market_data.price_usd.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  var value;
+  var valuePercentage;
+
+  if (cryptoUpdated?.market_data.price_usd) {
+    value = cryptoUpdated.market_data.price_usd.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  if (cryptoUpdated?.market_data.percent_change_usd_last_1_hour) {
+    valuePercentage =
+      cryptoUpdated.market_data.percent_change_usd_last_1_hour.toLocaleString(
+        'en-US',
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      );
+  }
 
   return (
     <View style={styles.principalContainer}>
@@ -69,44 +84,24 @@ function DetailCrypto({route}: any) {
           cryptoUpdated &&
           cryptoUpdated.market_data.percent_change_usd_last_1_hour > 0 ? (
             <View style={styles.iconContainer}>
-              {cryptoUpdated &&
+              {valuePercentage &&
+              cryptoUpdated &&
               cryptoUpdated.market_data.percent_change_usd_last_1_hour ? (
-                <>
-                  <Icon name="north-east" size={15} color="#0A8150" />
-                  <Text style={[styles.green, styles.subTitle]}>
-                    {cryptoUpdated &&
-                      cryptoUpdated.market_data.percent_change_usd_last_1_hour.toLocaleString(
-                        'en-US',
-                        {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        },
-                      )}
-                    %
-                  </Text>
-                </>
+                <AnimatedText
+                  text={valuePercentage}
+                  type="Positive"></AnimatedText>
               ) : (
                 <Text style={styles.subTitle}>Not available</Text>
               )}
             </View>
           ) : (
             <View style={styles.iconContainer}>
-              {cryptoUpdated &&
+              {valuePercentage &&
+              cryptoUpdated &&
               cryptoUpdated.market_data.percent_change_usd_last_1_hour ? (
-                <>
-                  <Icon name="south-west" size={15} color="#DE3617" />
-                  <Text style={[styles.red, styles.subTitle]}>
-                    {cryptoUpdated &&
-                      cryptoUpdated.market_data.percent_change_usd_last_1_hour.toLocaleString(
-                        'en-US',
-                        {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        },
-                      )}
-                    %
-                  </Text>
-                </>
+                <AnimatedText
+                  text={valuePercentage}
+                  type="Negative"></AnimatedText>
               ) : (
                 <Text style={styles.subTitle}>Not available</Text>
               )}

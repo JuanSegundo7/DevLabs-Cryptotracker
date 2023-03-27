@@ -1,6 +1,7 @@
 import React from 'react';
 import {Modal, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {useAppDispatch} from '../redux/hook';
 import {clearError} from '../redux/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RootState} from '../models/types';
@@ -19,12 +20,12 @@ function ModalContainer({
   page,
   logo,
 }: ModalInterface) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const error = useSelector((state: RootState) => state.Error);
   const navigation = useNavigation();
 
   const handlePress = () => {
-    dispatch(clearError() as any);
+    dispatch(clearError());
 
     if (page == 'Detail') {
       setModalVisible(false);

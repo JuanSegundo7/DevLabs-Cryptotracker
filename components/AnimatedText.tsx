@@ -1,8 +1,17 @@
 import {useEffect, useRef, useState} from 'react';
 import {Animated, Easing, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function AnimatedText({text, page}: {text: string; page: string}) {
-  const animation = useRef(new Animated.Value(1));
+function AnimatedText({
+  text,
+  page,
+  type,
+}: {
+  text: string;
+  page?: string;
+  type?: string;
+}) {
+  const animation = useRef(new Animated.Value(0));
   const [innerText, setText] = useState(text);
 
   useEffect(() => {
@@ -21,8 +30,35 @@ function AnimatedText({text, page}: {text: string; page: string}) {
         duration: 300,
         easing: Easing.linear,
       }).start();
-    }, 101);
-  }, [text, innerText]);
+    }, 301);
+  }, [text]);
+
+  if (type) {
+    return (
+      <Animated.Text
+        style={[
+          type == 'Positive'
+            ? [styles.subTitle, styles.green]
+            : [styles.subTitle, styles.red],
+          {opacity: animation.current},
+        ]}>
+        {type == 'Positive' ? (
+          <>
+            {' '}
+            <Icon name="north-east" size={15} color="#0A8150" />
+            {innerText}%
+          </>
+        ) : (
+          <>
+            {' '}
+            <Icon name="south-west" size={15} color="#DE3617" />
+            {innerText}%
+          </>
+        )}
+      </Animated.Text>
+    );
+  }
+
   return (
     <Animated.Text
       style={[
@@ -47,6 +83,17 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 30,
     color: '#212B36',
+  },
+  subTitle: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 20,
+  },
+  green: {
+    color: '#0A8150',
+  },
+  red: {
+    color: '#DE3617',
   },
 });
 

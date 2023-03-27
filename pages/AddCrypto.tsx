@@ -8,7 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {useAppDispatch} from '../redux/hook';
 import {getOneCrypto} from '../redux/actions';
 import ModalComponent from '../components/Modal';
 import {Navigation, RootState} from '../models/types';
@@ -17,7 +18,7 @@ const windowHeight = Dimensions.get('window').height;
 
 function AddCrypto({navigation}: Navigation) {
   const error = useSelector((state: RootState) => state.Error);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [isEffectComplete, setIsEffectComplete] = useState(false);
   const [isActionComplete, setIsActionComplete] = useState(false);
@@ -51,7 +52,7 @@ function AddCrypto({navigation}: Navigation) {
 
   const handlePress = async () => {
     try {
-      await dispatch(getOneCrypto(crypto) as any);
+      await dispatch(getOneCrypto(crypto));
       setIsActionComplete(true);
     } catch (error) {
       setIsEffectComplete(false);

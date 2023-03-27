@@ -41,10 +41,26 @@ function CryptoDetail({crypto}: Props) {
       navigation.navigate('DetailCrypto' as never, {crypto: crypto} as never);
   };
 
-  const value = crypto?.market_data.price_usd.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+  var value;
+  var valuePercentage;
+
+  if (crypto.market_data.price_usd) {
+    value = crypto.market_data.price_usd.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  }
+
+  if (crypto.market_data.percent_change_usd_last_1_hour) {
+    valuePercentage =
+      crypto.market_data.percent_change_usd_last_1_hour.toLocaleString(
+        'en-US',
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      );
+  }
 
   return (
     <>
@@ -67,7 +83,7 @@ function CryptoDetail({crypto}: Props) {
                 </View>
               </View>
               <View style={[styles.insideContainer, styles.rightAlign]}>
-                {crypto.market_data.price_usd ? (
+                {value && crypto.market_data.price_usd ? (
                   <AnimatedText text={value} page="Home"></AnimatedText>
                 ) : (
                   <Text style={styles.title}>Not available</Text>
@@ -75,40 +91,22 @@ function CryptoDetail({crypto}: Props) {
                 {crypto.market_data.percent_change_usd_last_1_hour &&
                 crypto.market_data.percent_change_usd_last_1_hour > 0 ? (
                   <View style={styles.iconContainer}>
-                    {crypto.market_data.percent_change_usd_last_1_hour ? (
-                      <>
-                        <Icon name="north-east" size={15} color="#0A8150" />
-                        <Text style={[styles.green, styles.subTitle]}>
-                          {crypto.market_data.percent_change_usd_last_1_hour.toLocaleString(
-                            'en-US',
-                            {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            },
-                          )}
-                          %
-                        </Text>
-                      </>
+                    {valuePercentage &&
+                    crypto.market_data.percent_change_usd_last_1_hour ? (
+                      <AnimatedText
+                        text={valuePercentage}
+                        type="Positive"></AnimatedText>
                     ) : (
                       <Text style={styles.subTitle}>Not available</Text>
                     )}
                   </View>
                 ) : (
                   <View style={styles.iconContainer}>
-                    {crypto.market_data.percent_change_usd_last_1_hour ? (
-                      <>
-                        <Icon name="south-west" size={15} color="#DE3617" />
-                        <Text style={[styles.red, styles.subTitle]}>
-                          {crypto.market_data.percent_change_usd_last_1_hour.toLocaleString(
-                            'en-US',
-                            {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            },
-                          )}
-                          %
-                        </Text>
-                      </>
+                    {valuePercentage &&
+                    crypto.market_data.percent_change_usd_last_1_hour ? (
+                      <AnimatedText
+                        text={valuePercentage}
+                        type="Negative"></AnimatedText>
                     ) : (
                       <Text style={styles.subTitle}>Not available</Text>
                     )}

@@ -5,7 +5,8 @@ import HomeScreen from '../pages/Home';
 import AddCryptoScreen from '../pages/AddCrypto';
 import DetailCryptoScreen from '../pages/DetailCrypto';
 
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {useAppDispatch} from '../redux/hook';
 
 import {RootState} from '../models/types';
 
@@ -16,20 +17,20 @@ function Navigation() {
   const cryptos = useSelector((state: RootState) => state.Cryptos);
   const updatedInfo = useSelector((state: RootState) => state.UpdatedInfo);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (cryptos.length && updatedInfo.length) {
       cryptos.forEach(crypto => {
-        dispatch(updateCryptos(crypto, updatedInfo) as any);
+        dispatch(updateCryptos(crypto, updatedInfo));
       });
     }
   }, [updatedInfo]);
 
   useEffect(() => {
     const interval1 = setInterval(() => {
-      dispatch(updateCryptosApi() as any);
-      dispatch(getAsyncData() as any);
+      dispatch(updateCryptosApi());
+      dispatch(getAsyncData());
     }, 6000);
     return () => clearInterval(interval1);
   }, []);
