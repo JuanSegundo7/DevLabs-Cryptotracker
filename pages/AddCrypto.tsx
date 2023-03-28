@@ -8,11 +8,12 @@ import {
   Dimensions,
 } from 'react-native';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../redux/hook';
 import {getOneCrypto} from '../redux/actions';
 import ModalComponent from '../components/Modal';
 import {Navigation, RootState} from '../models/types';
+import Colors from '../components/Colors';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     fontSize: 16,
     fontWeight: '400',
-    color: '#385775',
+    color: Colors.blue.color,
   },
   principalText: {
     fontSize: 24,
@@ -131,22 +132,22 @@ const styles = StyleSheet.create({
     lineHeight: 36,
     letterSpacing: -0.25,
     textAlign: 'left',
-    color: '#212B36',
+    color: Colors.blackTitle.color,
   },
   input: {
     height: 56,
     width: '100%',
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#B7C0C6',
-    backgroundColor: '#FAFBFC',
+    borderColor: Colors.greyBorder.color,
+    backgroundColor: Colors.whiteBackground.color,
     marginTop: 24,
     marginBottom: 16,
     paddingLeft: 8,
     paddingVertical: 16,
   },
   focused: {
-    borderColor: '#FBD24D',
+    borderColor: Colors.yellow.color,
     borderWidth: 2,
   },
   buttonContainer: {
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     height: 48,
     width: 155,
     borderRadius: 4,
-    backgroundColor: '#FBD24D',
+    backgroundColor: Colors.yellow.color,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   focusedButton: {
-    color: '#385775',
+    color: Colors.blue.color,
   },
 });
 

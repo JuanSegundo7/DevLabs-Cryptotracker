@@ -16,6 +16,7 @@ import {getAsyncData} from '../redux/actions';
 
 import {Navigation, RootState} from '../models/types';
 import {Crypto} from '../models/types';
+import Colors from '../components/Colors';
 
 function Home({navigation}: Navigation) {
   const dispatch = useAppDispatch();
@@ -45,15 +46,6 @@ function Home({navigation}: Navigation) {
             <Text style={styles.text} onPress={handlePress}>
               + Add a Cryptocurrency
             </Text>
-            {/* <View>
-              <Icon
-                style={styles.icon}
-                onPress={handlePress}
-                name="add-circle"
-                size={60}
-                color="#385775"
-              />
-            </View> */}
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -75,7 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '400',
-    color: '#385775',
+    color: Colors.blue.color,
     marginVertical: 48,
   },
   icon: {

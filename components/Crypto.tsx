@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Crypto} from '../models/types';
 import AnimatedText from './AnimatedText';
+import Colors from './Colors';
 
 interface Props {
   crypto: Crypto;
@@ -156,17 +157,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  green: {
-    color: '#0A8150',
-  },
-  red: {
-    color: '#DE3617',
-  },
   title: {
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 24,
-    color: '#212B36',
+    color: Colors.blackTitle.color,
   },
   subTitle: {
     fontSize: 14,
@@ -175,7 +170,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: '#E4E8EB',
+    backgroundColor: Colors.grey.color,
     width: '85%',
     marginTop: 10,
     marginBottom: 10,

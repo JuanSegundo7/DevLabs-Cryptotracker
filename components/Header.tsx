@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 const Avatar = require('./assets/avatar.png');
+import Colors from './Colors';
 
 function Header() {
   return (
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: 138,
-    backgroundColor: '#385775',
+    backgroundColor: Colors.blue.color,
     color: 'white',
     flexDirection: 'row',
     alignItems: 'center',

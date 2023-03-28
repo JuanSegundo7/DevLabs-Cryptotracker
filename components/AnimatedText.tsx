@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {Animated, Easing, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Colors from './Colors';
 
 function AnimatedText({
   text,
@@ -73,14 +74,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     lineHeight: 24,
-    color: '#212B36',
+    color: Colors.blackTitle.color,
   },
   detail: {
     marginTop: 20,
     fontSize: 30,
     fontWeight: '600',
     lineHeight: 30,
-    color: '#212B36',
+    color: Colors.blackTitle.color,
   },
   subTitle: {
     fontSize: 14,
@@ -88,10 +89,10 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   green: {
-    color: '#0A8150',
+    color: Colors.green.color,
   },
   red: {
-    color: '#DE3617',
+    color: Colors.red.color,
   },
   logo: {
     marginRight: 35,

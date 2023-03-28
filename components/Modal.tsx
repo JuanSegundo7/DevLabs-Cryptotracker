@@ -6,6 +6,7 @@ import {clearError} from '../redux/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RootState} from '../models/types';
 import {useNavigation} from '@react-navigation/native';
+import Colors from './Colors';
 
 interface ModalInterface {
   modalVisible: boolean;
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 30,
     paddingHorizontal: 20,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white.color,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',

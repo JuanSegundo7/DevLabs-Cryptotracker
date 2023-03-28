@@ -15,6 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {Crypto, RootState, Route} from '../models/types';
 import AnimatedText from '../components/AnimatedText';
+import Colors from '../components/Colors';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -30,8 +31,6 @@ function DetailCrypto({route}: Route) {
   const cryptoUpdated = cryptos.find(
     (cryptoFromArray: Crypto) => cryptoFromArray.id === crypto.id,
   );
-
-  useEffect(() => {}, [cryptoUpdated, cryptos]);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -134,7 +133,7 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     fontSize: 16,
     fontWeight: '400',
-    color: '#385775',
+    color: Colors.blue.color,
     backgroundColor: 'white',
   },
   container: {
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
     top: 0,
     borderRadius: 4,
     marginTop: 15,
-    backgroundColor: '#FBD24D',
+    backgroundColor: Colors.yellow.color,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -183,10 +182,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   green: {
-    color: '#0A8150',
+    color: Colors.green.color,
   },
   red: {
-    color: '#DE3617',
+    color: Colors.red.color,
   },
   subTitle: {
     fontSize: 14,
