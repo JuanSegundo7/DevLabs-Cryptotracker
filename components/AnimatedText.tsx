@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {Animated, Easing, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Colors from './Colors';
+import Colors from '../utils/Colors';
 
 function AnimatedText({
   text,

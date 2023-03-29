@@ -15,12 +15,12 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {Crypto, RootState, Route} from '../models/types';
 import AnimatedText from '../components/AnimatedText';
-import Colors from '../components/Colors';
+import Colors from '../utils/Colors';
 
 const windowHeight = Dimensions.get('window').height;
 
 function DetailCrypto({route}: Route) {
-  const cryptos = useSelector((state: RootState) => state.Cryptos);
+  const cryptos = useSelector(({Cryptos}: RootState) => Cryptos);
 
   const navigation = useNavigation();
   const dispatch = useAppDispatch();

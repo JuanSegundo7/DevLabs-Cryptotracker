@@ -12,7 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Crypto} from '../models/types';
 import AnimatedText from './AnimatedText';
-import Colors from './Colors';
+import Colors from '../utils/Colors';
 
 interface Props {
   crypto: Crypto;

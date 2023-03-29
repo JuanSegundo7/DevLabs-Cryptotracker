@@ -13,12 +13,12 @@ import {useAppDispatch} from '../redux/hook';
 import {getOneCrypto} from '../redux/actions';
 import ModalComponent from '../components/Modal';
 import {Navigation, RootState} from '../models/types';
-import Colors from '../components/Colors';
+import Colors from '../utils/Colors';
 
 const windowHeight = Dimensions.get('window').height;
 
 function AddCrypto({navigation}: Navigation) {
-  const error = useSelector((state: RootState) => state.Error);
+  const error = useSelector(({Error}: RootState) => Error);
   const dispatch = useAppDispatch();
 
   const [isEffectComplete, setIsEffectComplete] = useState(false);

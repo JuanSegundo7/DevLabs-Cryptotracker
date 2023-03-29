@@ -16,11 +16,11 @@ import {getAsyncData} from '../redux/actions';
 
 import {Navigation, RootState} from '../models/types';
 import {Crypto} from '../models/types';
-import Colors from '../components/Colors';
+import Colors from '../utils/Colors';
 
 function Home({navigation}: Navigation) {
   const dispatch = useAppDispatch();
-  const cryptos = useSelector((state: RootState) => state.Cryptos);
+  const cryptos = useSelector(({Cryptos}: RootState) => Cryptos);
 
   const handlePress = () => {
     navigation.navigate('AddCrypto');

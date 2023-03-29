@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 const Avatar = require('./assets/avatar.png');
-import Colors from './Colors';
+import Colors from '../utils/Colors';
 
 function Header() {
   return (

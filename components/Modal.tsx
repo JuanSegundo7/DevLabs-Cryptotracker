@@ -6,7 +6,7 @@ import {clearError} from '../redux/actions';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {RootState} from '../models/types';
 import {useNavigation} from '@react-navigation/native';
-import Colors from './Colors';
+import Colors from '../utils/Colors';
 
 interface ModalInterface {
   modalVisible: boolean;
@@ -22,7 +22,7 @@ function ModalContainer({
   logo,
 }: ModalInterface) {
   const dispatch = useAppDispatch();
-  const error = useSelector((state: RootState) => state.Error);
+  const error = useSelector(({Error}: RootState) => Error);
   const navigation = useNavigation();
 
   const handlePress = () => {
