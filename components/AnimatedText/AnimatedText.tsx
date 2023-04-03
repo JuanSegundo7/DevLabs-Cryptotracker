@@ -1,7 +1,11 @@
 import {useEffect, useRef, useState} from 'react';
 import {Animated, Easing, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Colors from '../utils/Colors';
+
+import {
+  AnimatedTextPrincipalNumber,
+  AnimatedTextPercentageNumber,
+} from './styles';
 
 function AnimatedText({
   text,
@@ -36,13 +40,9 @@ function AnimatedText({
 
   if (type) {
     return (
-      <Animated.Text
-        style={[
-          type == 'Positive'
-            ? [styles.subTitle, styles.green]
-            : [styles.subTitle, styles.red],
-          {opacity: animation.current},
-        ]}>
+      <AnimatedTextPercentageNumber
+        type={type}
+        style={{opacity: animation.current}}>
         {type == 'Positive' ? (
           <>
             <Icon name="north-east" size={15} color="#0A8150" />
@@ -54,49 +54,17 @@ function AnimatedText({
             {innerText}%
           </>
         )}
-      </Animated.Text>
+      </AnimatedTextPercentageNumber>
     );
   }
 
   return (
-    <Animated.Text
-      style={[
-        page == 'Home' ? styles.home : styles.detail,
-        {opacity: animation.current},
-      ]}>
+    <AnimatedTextPrincipalNumber
+      page={page}
+      style={{opacity: animation.current}}>
       ${innerText}
-    </Animated.Text>
+    </AnimatedTextPrincipalNumber>
   );
 }
-
-const styles = StyleSheet.create({
-  home: {
-    fontSize: 20,
-    fontWeight: '600',
-    lineHeight: 24,
-    color: Colors.blackTitle.color,
-  },
-  detail: {
-    marginTop: 20,
-    fontSize: 30,
-    fontWeight: '600',
-    lineHeight: 30,
-    color: Colors.blackTitle.color,
-  },
-  subTitle: {
-    fontSize: 14,
-    fontWeight: '400',
-    lineHeight: 20,
-  },
-  green: {
-    color: Colors.green.color,
-  },
-  red: {
-    color: Colors.red.color,
-  },
-  logo: {
-    marginRight: 35,
-  },
-});
 
 export default AnimatedText;

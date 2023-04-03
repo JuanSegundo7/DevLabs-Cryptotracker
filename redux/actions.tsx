@@ -14,7 +14,7 @@ export const GET_UPDATE_CRYPTO = 'GET_UPDATE_CRYPTO';
 export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
   try {
     const {data} = await axios.get(
-      `https://data.messari.io/api/v1/assets/${crypto}/metrics`,
+      `${env.API_URL_ONE_ASSET}/${crypto}/metrics`,
       {
         headers: {
           'x-messari-api-key': env.API_KEY,
@@ -23,7 +23,7 @@ export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
     );
 
     const coinGeckoData = await axios.get(
-      `https://api.coingecko.com/api/v3/search?query=${crypto.toLowerCase()}`,
+      `${env.API_URL_IMAGES}?query=${crypto.toLowerCase()}`,
     );
 
     const finalCrypto = {
@@ -61,8 +61,8 @@ export const updateCryptos =
     crypto = {
       ...crypto,
       market_data: {
-        price_usd: newPriceUsd as number,
-        percent_change_usd_last_1_hour: newPercentageUsd as number,
+        price_usd: newPriceUsd!,
+        percent_change_usd_last_1_hour: newPercentageUsd!,
       },
     };
 
@@ -71,14 +71,11 @@ export const updateCryptos =
 
 export const updateCryptosApi = () => async (dispatch: Function) => {
   try {
-    const info = await axios.get(
-      'https://data.messari.io/api/v2/assets?fields=id,name,metrics/market_data/price_usd,metrics/market_data/percent_change_usd_last_1_hour&limit=500',
-      {
-        headers: {
-          'x-messari-api-key': env.API_KEY,
-        },
+    const info = await axios.get(`${env.API_URL_ALL_ASSETS}`, {
+      headers: {
+        'x-messari-api-key': env.API_KEY,
       },
-    );
+    });
 
     const {data} = info.data;
 

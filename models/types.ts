@@ -4,25 +4,25 @@ export interface Crypto{
 	symbol: string,
 	name: string,
 	slug: string,
-    market_data: Market_data_values
-    metrics?: market_data
+    market_data: MarketDataValues
+    metrics?: marketData
 }
 
-interface market_data {
-    market_data: Market_data_values
+interface marketData {
+    market_data: MarketDataValues
 }
 
-interface Market_data_values{
+interface MarketDataValues{
     price_usd: number,
     percent_change_usd_last_1_hour: number,
 
 }
 
 export interface RootState{
-    Cryptos: Array<Crypto>
+    Cryptos: Crypto[]
     Crypto: Object
     Error: string
-    UpdatedInfo: Array<Crypto>
+    UpdatedInfo: Crypto[]
 }
 
 export interface Navigation{
@@ -30,8 +30,8 @@ export interface Navigation{
     route: any
 }
 
-interface NavigationValues{
-    navigate: Function,
+export interface NavigationValues{
+    navigate: (route: string, object?: Object) => void ,
     addListener: Function
 }
 

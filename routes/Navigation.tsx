@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import HomeScreen from '../pages/Home';
-import AddCryptoScreen from '../pages/AddCrypto';
-import DetailCryptoScreen from '../pages/DetailCrypto';
+import HomeScreen from '../pages/Home/Home';
+import AddCryptoScreen from '../pages/AddCrypto/AddCrypto';
+import DetailCryptoScreen from '../pages/DetailCrypto/DetailCrypto';
 
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../redux/hook';
@@ -18,6 +18,8 @@ function Navigation() {
   const updatedInfo = useSelector((state: RootState) => state.UpdatedInfo);
 
   const dispatch = useAppDispatch();
+
+  console.log(cryptos, 'cryptos');
 
   useEffect(() => {
     if (cryptos.length && updatedInfo.length) {
