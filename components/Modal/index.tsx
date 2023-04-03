@@ -51,21 +51,13 @@ const ModalContainer = ({
         <ModalContainerStyle>
           <ModalCrossContainer>
             <ModalCross onPress={handlePress}>
-              <Icon
-                name="highlight-off"
-                size={20}
-                color={`${theme.colors.black}`}
-              />
+              <Icon name="highlight-off" size={20} color={theme.colors.black} />
             </ModalCross>
           </ModalCrossContainer>
           {logo === 'Done' ? (
-            <Icon
-              name="check-circle"
-              size={65}
-              color={`${theme.colors.green}`}
-            />
+            <Icon name="check-circle" size={65} color={theme.colors.green} />
           ) : (
-            <Icon name="cancel" size={65} color={`${theme.colors.red}`} />
+            <Icon name="cancel" size={65} color={theme.colors.red} />
           )}
           <ModalText>{(error && error) || (apiError && apiError)}</ModalText>
         </ModalContainerStyle>

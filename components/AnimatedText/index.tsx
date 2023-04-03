@@ -46,12 +46,12 @@ const AnimatedText = ({
         style={{opacity: animation.current}}>
         {type == 'Positive' ? (
           <>
-            <Icon name="north-east" size={15} color={`${theme.colors.green}`} />
+            <Icon name="north-east" size={15} color={theme.colors.green} />
             {innerText}%
           </>
         ) : (
           <>
-            <Icon name="south-west" size={15} color={`${theme.colors.red}`} />
+            <Icon name="south-west" size={15} color={theme.colors.red} />
             {innerText}%
           </>
         )}

@@ -76,7 +76,7 @@ const CryptoDetail = ({crypto}: Props) => {
         <CryptoTouchableContainer onPress={handlePress}>
           {!crypto ? (
             <CryptoLoaderContainer spin={spin}>
-              <Icon name="autorenew" size={35} color={`${theme.colors.blue}`} />
+              <Icon name="autorenew" size={35} color={theme.colors.blue} />
             </CryptoLoaderContainer>
           ) : (
             <>

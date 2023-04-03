@@ -33,8 +33,8 @@ const DetailCrypto = ({route}: Route) => {
   const {params} = route ?? {};
   const {crypto} = params ?? {};
 
-  const cryptoUpdated = crypto && cryptos.find(
-    (cryptoFromArray: Crypto) => cryptoFromArray.id === crypto.id,
+  const cryptoUpdated = cryptos.find(
+    (cryptoFromArray: Crypto) => cryptoFromArray.id === crypto?.id,
   );
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -78,9 +78,9 @@ const DetailCrypto = ({route}: Route) => {
         {`<`} Back to list
       </DetailCryptoLink>
       <DetailCryptoSubContainer>
-        <DetailCryptoImage source={{uri: crypto && crypto.image}} />
-        <DetailCryptoTitle>{crypto && crypto.name}</DetailCryptoTitle>
-        <Text>{crypto && crypto.symbol}</Text>
+        <DetailCryptoImage source={{uri: crypto?.image}} />
+        <DetailCryptoTitle>{crypto?.name}</DetailCryptoTitle>
+        <Text>{crypto?.symbol}</Text>
         <DetailCryptoInsideContainer>
           {cryptoUpdated?.market_data.price_usd ? (
             <AnimatedText text={value} page="Detail" />
