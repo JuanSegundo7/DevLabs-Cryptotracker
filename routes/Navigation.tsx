@@ -24,7 +24,7 @@ function Navigation() {
     if (apiError) {
       setModalVisible(true);
     }
-  }, [updatedInfo]);
+  }, [apiError]);
 
   useEffect(() => {
     if (cryptos.length && updatedInfo.length) {
