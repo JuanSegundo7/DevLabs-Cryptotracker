@@ -31,6 +31,7 @@ const ModalContainer = ({
 }: ModalInterface) => {
   const dispatch = useAppDispatch();
   const error = useSelector(({Error}: RootState) => Error);
+  const apiError = useSelector(({ApiError}: RootState) => ApiError);
   const navigation: NavigationValues = useNavigation();
 
   const handlePress = () => {
@@ -62,7 +63,7 @@ const ModalContainer = ({
           ) : (
             <Icon name="cancel" size={65} color={`${theme.colors.red}`} />
           )}
-          <ModalText>{error && error}</ModalText>
+          <ModalText>{(error && error) || (apiError && apiError)}</ModalText>
         </ModalContainerStyle>
       </ModalBackground>
     </Modal>
