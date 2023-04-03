@@ -30,10 +30,10 @@ const DetailCrypto = ({route}: Route) => {
   const navigation: NavigationValues = useNavigation();
   const dispatch = useAppDispatch();
 
-  const {params} = route;
-  const {crypto} = params;
+  const {params} = route ?? {};
+  const {crypto} = params ?? {};
 
-  const cryptoUpdated = cryptos.find(
+  const cryptoUpdated = crypto && cryptos.find(
     (cryptoFromArray: Crypto) => cryptoFromArray.id === crypto.id,
   );
 
@@ -44,7 +44,7 @@ const DetailCrypto = ({route}: Route) => {
   };
 
   const handleEliminate = () => {
-    dispatch(eliminateCrypto(crypto.id));
+    crypto && dispatch(eliminateCrypto(crypto.id));
     setModalVisible(true);
   };
 
@@ -78,9 +78,9 @@ const DetailCrypto = ({route}: Route) => {
         {`<`} Back to list
       </DetailCryptoLink>
       <DetailCryptoSubContainer>
-        <DetailCryptoImage source={{uri: crypto.image}} />
-        <DetailCryptoTitle>{crypto.name}</DetailCryptoTitle>
-        <Text>{crypto.symbol}</Text>
+        <DetailCryptoImage source={{uri: crypto && crypto.image}} />
+        <DetailCryptoTitle>{crypto && crypto.name}</DetailCryptoTitle>
+        <Text>{crypto && crypto.symbol}</Text>
         <DetailCryptoInsideContainer>
           {cryptoUpdated?.market_data.price_usd ? (
             <AnimatedText text={value} page="Detail" />

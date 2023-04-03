@@ -37,7 +37,7 @@ export interface NavigationValues{
 }
 
 export interface Route {
-    route: RouteValues
+    route?: RouteValues
 
 }
 
