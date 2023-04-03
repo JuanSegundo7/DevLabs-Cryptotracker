@@ -1,6 +1,6 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
-import {colorsStyled} from "../../utils/Colors"
+import {theme} from "../../utils/theme"
 
 export const ModalBackground = styled(View)`
     position: absolute;
@@ -19,7 +19,7 @@ export const ModalContainerStyle = styled(View)`
     padding-top: 20px;
     padding-bottom: 30px;
     padding-horizontal: 20px;
-    background-color: ${colorsStyled.white};
+    background-color: ${theme.colors.white};
     border-radius: 15px;
     justify-content: center;
     align-items: center;
@@ -44,15 +44,3 @@ export const ModalCrossContainer = styled(View)`
 export const ModalCross = styled(TouchableOpacity)`
     width: auto
 `
-
-// export const ModalCheckCircleIcon = styled(Icon)`
-//     margin-bottom: 10px,
-//     font-size: 60px
-//     color: ${colorsStyled.green}
-// `
-
-// export const ModalCrossIcon = styled(Icon)`
-//     margin-bottom: 10px,
-//     font-size: 60px
-//     color: ${colorsStyled.red}
-// `

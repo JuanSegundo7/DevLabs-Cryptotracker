@@ -14,6 +14,7 @@ import {
   ModalCross,
   ModalText,
 } from './styles';
+import {theme} from '../../utils/theme';
 
 interface ModalInterface {
   modalVisible: boolean;
@@ -53,9 +54,13 @@ const ModalContainer = ({
             </ModalCross>
           </ModalCrossContainer>
           {logo === 'Done' ? (
-            <Icon name="check-circle" size={65} color={'#0A8150'} />
+            <Icon
+              name="check-circle"
+              size={65}
+              color={`${theme.colors.green}`}
+            />
           ) : (
-            <Icon name="cancel" size={65} color={'#DE3617'} />
+            <Icon name="cancel" size={65} color={`${theme.colors.red}`} />
           )}
           <ModalText>{error && error}</ModalText>
         </ModalContainerStyle>

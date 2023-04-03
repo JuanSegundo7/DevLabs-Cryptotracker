@@ -1,19 +1,19 @@
 import { View, Text, Image } from "react-native";
 import styled from 'styled-components';
-import {colorsStyled} from "../../utils/Colors"
+import {theme} from "../../utils/theme"
 
 export const HeaderContainer = styled(View)`
     width: 100%;
     height: 138px;
-    background-color: ${colorsStyled.blue};
-    color: ${colorsStyled.white};
+    background-color: ${theme.colors.blue};
+    color: ${theme.colors.white};
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding-horizontal: 24px;
 `
 export const HeaderFont = styled(Text)`
-    color: ${colorsStyled.white};
+    color: ${theme.colors.white};
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;

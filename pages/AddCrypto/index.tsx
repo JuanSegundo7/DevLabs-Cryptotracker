@@ -14,7 +14,7 @@ import {
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../../redux/hook';
 import {getOneCrypto} from '../../redux/actions';
-import ModalComponent from '../../components/Modal/Modal';
+import ModalComponent from '../../components/Modal';
 import {Navigation, RootState} from '../../models/types';
 
 const AddCrypto = ({navigation}: Navigation) => {

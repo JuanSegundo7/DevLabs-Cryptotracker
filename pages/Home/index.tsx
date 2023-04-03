@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 
-import CryptoDetail from '../../components/Crypto/Crypto';
-import Header from '../../components/Header/Header';
+import CryptoDetail from '../../components/Crypto';
+import Header from '../../components/Header';
 
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../../redux/hook';
@@ -34,9 +34,9 @@ const Home = ({navigation}: Navigation) => {
       <ScrollViewContainer>
         <HomeContainer>
           {cryptos.length > 0 &&
-            cryptos.map((crypto: Crypto) => {
-              return <CryptoDetail crypto={crypto} key={crypto.id} />;
-            })}
+            cryptos.map((crypto: Crypto) => (
+              <CryptoDetail crypto={crypto} key={crypto.id} />
+            ))}
           <TouchableOpacity>
             <HomeText onPress={handlePress}>+ Add a Cryptocurrency</HomeText>
           </TouchableOpacity>

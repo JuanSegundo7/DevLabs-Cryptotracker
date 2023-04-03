@@ -1,6 +1,6 @@
 import {Animated} from 'react-native';
 import styled from 'styled-components';
-import {colorsStyled} from "../../utils/Colors"
+import {theme} from "../../utils/theme"
 
 interface AnimatedTextPrincipalNumberProps {
     page?: string;
@@ -15,7 +15,7 @@ export const AnimatedTextPrincipalNumber = styled(Animated.Text)<AnimatedTextPri
     font-weight: 600;
     line-height: ${({page}) => (page === 'Home' ? '24px' : '30px')};
     margin-top: ${({page}) => (page === 'Home' ? '0px' : '20px')};
-    color: ${colorsStyled.blackTitle};
+    color: ${theme.colors.blackTitle};
 }
 `
 
@@ -26,13 +26,13 @@ export const AnimatedTextPercentageNumber = styled(Animated.Text)<AnimatedTextPe
     ${({ type }) =>
     type === 'Positive' &&
     `
-        color: ${colorsStyled.green}
+        color: ${theme.colors.green}
     `}
 
     ${({ type }) =>
     type !== 'Positive' &&
     `
-        color: ${colorsStyled.red}
+        color: ${theme.colors.red}
     `}
 }
 `

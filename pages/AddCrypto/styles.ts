@@ -1,7 +1,7 @@
 
 import {View, Text, TextProps, TextInput, TextInputProps, TouchableOpacity, TouchableOpacityProps, Dimensions } from "react-native";
 import styled from 'styled-components';
-import {colorsStyled} from "../../utils/Colors"
+import {theme} from "../../utils/theme"
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -19,7 +19,7 @@ interface AddCryptoTextProps extends TextProps {
 
 
 export const AddCryptoPrincipalContainer = styled(View)`
-    background-color: ${colorsStyled.white};
+    background-color: ${theme.colors.white};
     width: 100%;
     height: 100%;
 `
@@ -38,7 +38,7 @@ export const AddCryptoLink = styled(Text)`
     margin-left: 24px;
     font-size: 16px;
     font-weight: 400;
-    color: ${colorsStyled.blue};
+    color: ${theme.colors.blue};
 `
 
 export const AddCryptoPrincipalText = styled(Text)`
@@ -47,15 +47,15 @@ export const AddCryptoPrincipalText = styled(Text)`
     line-height: 36px;
     letter-spacing: -0.25px;
     text-align: left;
-    color: ${colorsStyled.blackTitle};
+    color: ${theme.colors.blackTitle};
 `
 
 export const AddCryptoTextInput = styled(TextInput)<AddCryptoTextInputProps>`
     height: 56px;
     width: 100%;
     border-radius: 4px;
-    border: 1px solid ${colorsStyled.greyBorder};
-    background-color: ${colorsStyled.whiteBackground};
+    border: 1px solid ${theme.colors.greyBorder};
+    background-color: ${theme.colors.whiteBackground};
     margin-top: 24px;
     margin-bottom: 16px;
     padding-left: 8px;
@@ -65,7 +65,7 @@ export const AddCryptoTextInput = styled(TextInput)<AddCryptoTextInputProps>`
     ${({ isFocused }) =>
     isFocused &&    
     `
-    border: 2px solid ${colorsStyled.yellow};
+    border: 2px solid ${theme.colors.yellow};
 
   `}
 `
@@ -81,7 +81,7 @@ export const AddCryptoButton = styled(TouchableOpacity)<AddCryptoButtonProps>`
     height: 48px;
     width: 155px;
     border-radius: 4px;
-    background-color: #ffcc00;
+    background-color: ${theme.colors.buttonYellow};
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -103,7 +103,7 @@ export const AddCryptoText = styled(Text)<AddCryptoTextProps>`
 
     ${({ isFocused }) =>
     isFocused && `
-    color: ${colorsStyled.blue};
+    color: ${theme.colors.blue};
 
   `}
 `

@@ -17,7 +17,8 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Crypto, NavigationValues} from '../../models/types';
-import AnimatedText from '../AnimatedText/AnimatedText';
+import AnimatedText from '../AnimatedText';
+import {theme} from '../../utils/theme';
 
 interface Props {
   crypto: Crypto;
@@ -69,16 +70,13 @@ const CryptoDetail = ({crypto}: Props) => {
     return '';
   }, [crypto.market_data.percent_change_usd_last_1_hour]);
 
-  console.log(valuePercentage, 'valuePercentage');
-  console.log(value, 'value');
-
   return (
     <>
       <CryptoContainer>
         <CryptoTouchableContainer onPress={handlePress}>
           {!crypto ? (
             <CryptoLoaderContainer spin={spin}>
-              <Icon name="autorenew" size={35} color="#385775" />
+              <Icon name="autorenew" size={35} color={`${theme.colors.blue}`} />
             </CryptoLoaderContainer>
           ) : (
             <>

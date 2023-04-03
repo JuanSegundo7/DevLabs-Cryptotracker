@@ -1,6 +1,6 @@
 import {View,ViewProps,Text,Animated,Image,TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
-import {colorsStyled} from "../../utils/Colors"
+import {theme} from "../../utils/theme"
 
 interface CryptoInsideContainerProps extends ViewProps {
     rightAlign?: boolean;
@@ -73,7 +73,7 @@ export const CryptoTitle = styled(Text)`
     font-size: 16px;
     font-weight: 600;
     line-height: 24px;
-    color: ${colorsStyled.blackTitle};
+    color: ${theme.colors.blackTitle};
 `
 export const CryptoSubTitle = styled(Text)`
     font-size: 14px;
@@ -83,7 +83,7 @@ export const CryptoSubTitle = styled(Text)`
 
 export const CryptoDivider = styled(View)`
     height: 1px;
-    background-color: ${colorsStyled.grey};
+    background-color: ${theme.colors.grey};
     width: 85%;
     margin-top: 10px;
     margin-bottom: 10px;

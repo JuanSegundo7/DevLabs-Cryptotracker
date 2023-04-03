@@ -1,25 +1,30 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+
+import HomeScreen from '../pages/Home';
+import AddCryptoScreen from '../pages/AddCrypto';
+import DetailCryptoScreen from '../pages/DetailCrypto';
+import ModalComponent from '../components/Modal';
+
 import {createStackNavigator} from '@react-navigation/stack';
-
-import HomeScreen from '../pages/Home/Home';
-import AddCryptoScreen from '../pages/AddCrypto/AddCrypto';
-import DetailCryptoScreen from '../pages/DetailCrypto/DetailCrypto';
-
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../redux/hook';
-
 import {RootState} from '../models/types';
-
 import {updateCryptosApi, updateCryptos, getAsyncData} from '../redux/actions';
 
 function Navigation() {
   const Stack = createStackNavigator();
-  const cryptos = useSelector((state: RootState) => state.Cryptos);
-  const updatedInfo = useSelector((state: RootState) => state.UpdatedInfo);
-
+  const apiError = useSelector(({ApiError}: RootState) => ApiError);
+  const cryptos = useSelector(({Cryptos}: RootState) => Cryptos);
+  const updatedInfo = useSelector(({UpdatedInfo}: RootState) => UpdatedInfo);
   const dispatch = useAppDispatch();
 
-  console.log(cryptos, 'cryptos');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    if (apiError) {
+      setModalVisible(true);
+    }
+  }, [updatedInfo]);
 
   useEffect(() => {
     if (cryptos.length && updatedInfo.length) {
@@ -38,23 +43,31 @@ function Navigation() {
   }, []);
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        options={{headerShown: false}}
-        component={HomeScreen}
+    <>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          options={{headerShown: false}}
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          name="AddCrypto"
+          options={{headerShown: false}}
+          component={AddCryptoScreen}
+        />
+        <Stack.Screen
+          name="DetailCrypto"
+          options={{headerShown: false}}
+          component={DetailCryptoScreen}
+        />
+      </Stack.Navigator>
+      <ModalComponent
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        page="AddCrypto"
+        logo="Cross"
       />
-      <Stack.Screen
-        name="AddCrypto"
-        options={{headerShown: false}}
-        component={AddCryptoScreen}
-      />
-      <Stack.Screen
-        name="DetailCrypto"
-        options={{headerShown: false}}
-        component={DetailCryptoScreen}
-      />
-    </Stack.Navigator>
+    </>
   );
 }
 

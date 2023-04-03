@@ -6,6 +6,7 @@ import env from '../env';
 export const GET_ONE_CRYPTO = 'GET_ONE_CRYPTO';
 export const UPDATE_CRYPTO = 'UPDATE_CRYPTO';
 export const ERROR = 'ERROR';
+export const API_ERROR = 'API_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const ELIMINATE_CRYPTO = 'ELIMINATE_CRYPTO';
 export const GET_ASYNC_DATA = 'GET_ASYNC_DATA';
@@ -41,7 +42,6 @@ export const getOneCrypto = (crypto: string) => async (dispatch: Function) => {
 
     dispatch({type: GET_ONE_CRYPTO, payload: finalCrypto});
   } catch (e) {
-    console.log(e);
     dispatch({type: ERROR});
   }
 };
@@ -83,7 +83,7 @@ export const updateCryptosApi = () => async (dispatch: Function) => {
 
     return dispatch({type: GET_UPDATE_CRYPTO, payload: dataFlat});
   } catch (e) {
-    console.log(e);
+    dispatch({type: API_ERROR, payload: e});
   }
 };
 
@@ -101,7 +101,7 @@ export const getAsyncData = () => async (dispatch: Function) => {
     if (value !== null) {
       dispatch({type: GET_ASYNC_DATA, payload: JSON.parse(value)});
     }
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    dispatch({type: API_ERROR, payload: e});
   }
 };

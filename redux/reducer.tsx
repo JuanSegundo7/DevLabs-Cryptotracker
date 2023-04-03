@@ -3,6 +3,7 @@ import {
   GET_ONE_CRYPTO,
   UPDATE_CRYPTO,
   ERROR,
+  API_ERROR,
   CLEAR_ERROR,
   ELIMINATE_CRYPTO,
   GET_ASYNC_DATA,
@@ -15,6 +16,7 @@ const initialState = {
   Cryptos: [],
   Crypto: {},
   Error: '',
+  ApiError: '',
   UpdatedInfo: [],
 };
 
@@ -97,6 +99,13 @@ const cryptoReducer = (state = initialState, action: any) => {
       return {
         ...state,
         Error: 'The searched crypto is not available or it does not exist',
+      };
+    }
+
+    case API_ERROR: {
+      return {
+        ...state,
+        ApiError: action.payload,
       };
     }
 

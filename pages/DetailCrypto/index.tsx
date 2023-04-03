@@ -1,14 +1,14 @@
 import React, {useMemo, useState} from 'react';
 import {Text} from 'react-native';
 
-import Header from '../../components/Header/Header';
-import ModalContainer from '../../components/Modal/Modal';
+import Header from '../../components/Header';
+import ModalContainer from '../../components/Modal';
 import {useAppDispatch} from '../../redux/hook';
 import {eliminateCrypto} from '../../redux/actions';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {Crypto, RootState, Route} from '../../models/types';
-import AnimatedText from '../../components/AnimatedText/AnimatedText';
+import AnimatedText from '../../components/AnimatedText';
 import {NavigationValues} from '../../models/types';
 
 import {
@@ -43,7 +43,7 @@ const DetailCrypto = ({route}: Route) => {
     navigation.navigate('Home');
   };
 
-  var handleEliminate = () => {
+  const handleEliminate = () => {
     dispatch(eliminateCrypto(crypto.id));
     setModalVisible(true);
   };

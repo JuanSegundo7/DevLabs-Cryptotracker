@@ -22,6 +22,7 @@ export interface RootState{
     Cryptos: Crypto[]
     Crypto: Object
     Error: string
+    ApiError: string
     UpdatedInfo: Crypto[]
 }
 

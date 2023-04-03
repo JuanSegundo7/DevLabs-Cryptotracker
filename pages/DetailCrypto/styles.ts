@@ -1,11 +1,11 @@
 import {Text,TouchableOpacity,View,Image,Dimensions} from 'react-native';
 import styled from 'styled-components';
-import {colorsStyled} from "../../utils/Colors"
+import {theme} from "../../utils/theme"
 
 const windowHeight = Dimensions.get('window').height;
 
 export const DetailCryptoPrincipalContainer = styled(View)`
-    background-color: ${colorsStyled.white};
+    background-color: ${theme.colors.white};
     height: 100%;
 `
 
@@ -14,8 +14,8 @@ export const DetailCryptoLink = styled(Text)`
     margin-left: 24px;
     font-size: 16px;
     font-weight: 400;
-    color: ${colorsStyled.blue};
-    background-color: ${colorsStyled.white};
+    color: ${theme.colors.blue};
+    background-color: ${theme.colors.white};
 `
 
 export const DetailCryptoSubContainer = styled(View)`
@@ -44,7 +44,7 @@ export const DetailCryptoButton = styled(TouchableOpacity)`
     width: 155px;
     border-radius: 4px;
     margin-top: 15px;
-    background-color: ${colorsStyled.buttonYellow};
+    background-color: ${theme.colors.buttonYellow};
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -55,7 +55,7 @@ export const DetailCryptoButtonText = styled(Text)`
     font-weight: 600;
     line-height: 24px;
     letter-spacing: 0px;
-    color: #385775;
+    color: ${theme.colors.blue};
     text-align: center;
 `
 
