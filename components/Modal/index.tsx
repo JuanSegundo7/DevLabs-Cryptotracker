@@ -51,7 +51,11 @@ const ModalContainer = ({
         <ModalContainerStyle>
           <ModalCrossContainer>
             <ModalCross onPress={handlePress}>
-              <Icon name="highlight-off" size={20} color="black" />
+              <Icon
+                name="highlight-off"
+                size={20}
+                color={`${theme.colors.black}`}
+              />
             </ModalCross>
           </ModalCrossContainer>
           {logo === 'Done' ? (
